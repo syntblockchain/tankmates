@@ -73,9 +73,12 @@
     .room-display.long { font-size: 16px; letter-spacing: 3px; }
     .share { display: flex; gap: 8px; align-items: center; }
     .share input[type="text"] {
-      flex: 1; margin: 0; font-size: 13px; letter-spacing: 0; text-transform: none; text-align: left; padding: 10px;
+      flex: 1; min-width: 0; margin: 0; font-size: 13px; letter-spacing: 0; text-transform: none; text-align: left; padding: 10px;
     }
     .share .btn { width: auto; margin: 0; padding: 10px 14px; }
+    .invite-qr { margin: 16px auto 0; }
+    .invite-qr canvas { display: block; width: 200px; max-width: 100%; height: auto; margin: 0 auto; border-radius: 0; }
+    .invite-qr figcaption { color: #aaa; font-size: 11px; margin-top: 4px; }
     .share-hint { margin-bottom: 12px; font-size: 11px; }
     .room-label { margin-top: 16px; }
     #lobby-card.link-room .room-details,
@@ -195,6 +198,10 @@
           <input type="text" id="share-link" readonly aria-label="Invite link">
           <button class="btn secondary" id="copy-btn">Copy</button>
         </div>
+        <figure class="invite-qr">
+          <canvas id="invite-qr" role="img" aria-label="QR code for the invite link"></canvas>
+          <figcaption>Scan to join on your phone</figcaption>
+        </figure>
         <p class="hint share-hint">Send this link to your mates. They join straight away, no code needed.</p>
         <button class="btn ghost" id="leave-btn">Leave Room</button>
       </div>
@@ -242,6 +249,8 @@
   <script src="arena.js?v=__BUILD__"></script>
   <script src="engine.js?v=__BUILD__"></script>
   <script src="net.js?v=__BUILD__"></script>
+  <script src="vendor/qrcode-generator.js?v=__BUILD__"></script>
+  <script src="invite-qr.js?v=__BUILD__"></script>
   <script src="client.js?v=__BUILD__"></script>
 </body>
 </html>

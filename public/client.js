@@ -784,7 +784,11 @@
     $('start-btn').textContent = `Start game with ${count} player${count === 1 ? '' : 's'}`;
     $('start-btn').style.display = 'block';
     $('room-code-txt').classList.toggle('long', payload.roomCode.length > 6);
-    $('share-link').value = shareLink(payload.roomCode);
+    const inviteLink = shareLink(payload.roomCode);
+    if ($('share-link').value !== inviteLink) {
+      $('share-link').value = inviteLink;
+      window.renderInviteQR($('invite-qr'), inviteLink);
+    }
     history.replaceState(null, '', `${basePath()}?room=${encodeURIComponent(payload.roomCode.toLowerCase())}`);
   }
 
@@ -815,6 +819,8 @@
     state.playerId = null;
     state.hostId = null;
     state.lobbyPlayers = [];
+    $('share-link').value = '';
+    $('invite-qr').width = 0;
     renderSlots();
     $('room-view').style.display = 'none';
     $('setup-view').style.display = 'block';
